@@ -99,6 +99,10 @@ header.hero img{width:min(420px,80%);height:auto}
 .fmsg{font-size:14.5px;min-height:1.4em}
 .fmsg.ok{color:#2f6b3a}.fmsg.err{color:#a33}
 @media (max-width:640px){.cform .frow{grid-template-columns:1fr}}
+.fdone{max-width:640px;margin:8px auto 48px;padding:44px 32px;border:1px solid var(--gold);background:#fff;text-align:center}
+.fchk{width:56px;height:56px;margin:0 auto 18px;border-radius:50%;background:var(--gold);color:#fff;font-size:28px;line-height:56px}
+.fdone h3{font-size:20px;font-weight:600;margin-bottom:8px}
+.fdone p{color:#444;font-size:15px}
 .contact{background:#f6f6f6;padding:88px 0;text-align:center}
 .contact h2{margin-bottom:18px}
 .contact p{color:#333;font-size:16px}
@@ -368,7 +372,7 @@ body{line-height:1.85}
     <div class="kick">צור קשר</div>
     <h2>דברו איתנו</h2>
     <p style="margin-bottom:22px">לפניות מסחריות ולדיונים על שיתופי פעולה.</p>
-    <form class="cform" id="cform" action="https://api.web3forms.com/submit" method="POST" data-ok="תודה. פנייתכם התקבלה ותיענה בהקדם." data-err="מצטערים, ההודעה לא נשלחה. נסו שוב בעוד רגע." data-wait="שולח&hellip;">
+    <form class="cform" id="cform" action="https://api.web3forms.com/submit" method="POST" data-okt="פנייתכם נשלחה בהצלחה!" data-ok="נחזור אליכם בהקדם האפשרי." data-err="מצטערים, ההודעה לא נשלחה. נסו שוב בעוד רגע." data-wait="שולח&hellip;">
       <input type="hidden" name="access_key" value="59d49348-71dc-4d42-94fc-2169b55aeb9e">
       <input type="hidden" name="subject" value="New enquiry — Damir International website">
       <input type="hidden" name="from_name" value="Damir International website">
@@ -409,7 +413,7 @@ l.addEventListener('click',function(e){if(e.target.tagName==='A'){l.classList.re
 (function(){var f=document.getElementById('cform');if(!f)return;var m=f.querySelector('.fmsg'),b=f.querySelector('.fbtn'),lbl=b.textContent;
 f.addEventListener('submit',function(e){e.preventDefault();m.className='fmsg';m.innerHTML=f.dataset.wait;b.disabled=true;
 fetch(f.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){return r.json();}).then(function(d){
-if(d&&d.success){f.reset();m.className='fmsg ok';m.textContent=f.dataset.ok;}else{throw 0;}}).catch(function(){m.className='fmsg err';m.textContent=f.dataset.err;}).finally(function(){b.disabled=false;b.textContent=lbl;});});})();
+if(d&&d.success){var p=document.createElement('div');p.className='fdone';p.setAttribute('role','status');p.innerHTML='<div class="fchk">&#10003;</div><h3></h3><p></p>';p.querySelector('h3').textContent=f.dataset.okt;p.querySelector('p').textContent=f.dataset.ok;f.replaceWith(p);p.scrollIntoView({behavior:'smooth',block:'center'});}else{throw 0;}}).catch(function(){m.className='fmsg err';m.textContent=f.dataset.err;}).finally(function(){b.disabled=false;b.textContent=lbl;});});})();
 </script>
 </body>
 </html>
